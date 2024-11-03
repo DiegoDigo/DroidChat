@@ -7,10 +7,10 @@
       </SelectionState>
       <SelectionState runConfigName="Droid_Chat">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-11-03T13:17:57.676989300Z">
+        <DropdownSelection timestamp="2024-11-03T14:09:38.499672500Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\control\.android\avd\Pixel_3a_API_34.avd" />
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=RQCR2015ZCW" />
             </handle>
           </Target>
         </DropdownSelection>

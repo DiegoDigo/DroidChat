@@ -55,7 +55,7 @@ fun PrimaryTextField(
                     Icon(
                         painter = painterResource(id = leadingIcon),
                         contentDescription = "",
-                        tint = MaterialTheme.colorScheme.primary
+                        tint = errorMessages?.let { MaterialTheme.colorScheme.error } ?: MaterialTheme.colorScheme.primary
                     )
                 }
             },
@@ -70,7 +70,7 @@ fun PrimaryTextField(
                         painter = painterResource(id = visibilityIcon),
                         contentDescription = "",
                         modifier = Modifier.clickable { passwordVisible = !passwordVisible },
-                        tint = MaterialTheme.colorScheme.primary
+                        tint = errorMessages?.let { MaterialTheme.colorScheme.error } ?: MaterialTheme.colorScheme.primary
                     )
                 }
             },
@@ -95,7 +95,7 @@ fun PrimaryTextField(
                 errorMessages,
                 modifier = Modifier.padding(start = 16.dp),
                 color = MaterialTheme.colorScheme.error,
-
+                style = MaterialTheme.typography.labelMedium
                 )
         }
 
@@ -108,11 +108,26 @@ fun PrimaryTextField(
 private fun PrimaryTextFieldPreview() {
     DroidChatTheme {
         PrimaryTextField(
-            "123",
+            "",
+            {},
+            leadingIcon = R.drawable.ic_envelope,
+            keyBoardType = KeyboardType.Password,
+            placeholder = "Senha",
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun PrimaryTextFieldErrorPreview() {
+    DroidChatTheme {
+        PrimaryTextField(
+            "",
             {},
             errorMessages = "Senha é Obrigatoria",
             leadingIcon = R.drawable.ic_envelope,
-            keyBoardType = KeyboardType.Password
+            keyBoardType = KeyboardType.Password,
+            placeholder = "Senha",
         )
     }
 }
