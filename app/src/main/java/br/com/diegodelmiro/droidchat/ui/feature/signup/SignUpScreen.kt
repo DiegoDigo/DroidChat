@@ -3,6 +3,7 @@ package br.com.diegodelmiro.droidchat.ui.feature.signup
 import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -29,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.diegodelmiro.droidchat.R
 import br.com.diegodelmiro.droidchat.ui.components.PrimaryButtonField
+import br.com.diegodelmiro.droidchat.ui.components.ProfilePictureOptionModalBottomSheet
 import br.com.diegodelmiro.droidchat.ui.components.ProfilePictureSelector
 import br.com.diegodelmiro.droidchat.ui.components.SecondaryTextField
 import br.com.diegodelmiro.droidchat.ui.theme.BackgroundGradient
@@ -39,6 +42,7 @@ fun SignUpRoute() {
     SignUpScreen()
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SignUpScreen() {
     Box(
@@ -52,8 +56,12 @@ private fun SignUpScreen() {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
 
-            var profilePictureSeletedUri by remember {
+            val profilePictureSeletedUri by remember {
                 mutableStateOf<Uri?>(null)
+            }
+
+            var showModalBottomSheet by remember {
+                mutableStateOf(false)
             }
 
             Spacer(modifier = Modifier.height(52.dp))
@@ -73,7 +81,10 @@ private fun SignUpScreen() {
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     ProfilePictureSelector(
-                        imageUri = profilePictureSeletedUri
+                        imageUri = profilePictureSeletedUri,
+                        modifier = Modifier.clickable {
+                            showModalBottomSheet = true
+                        }
                     )
                     Spacer(modifier = Modifier.height(22.dp))
                     SecondaryTextField(
@@ -116,7 +127,13 @@ private fun SignUpScreen() {
                     )
                 }
             }
+            if (showModalBottomSheet) {
+                ProfilePictureOptionModalBottomSheet(
+                    onDismissRequest = { showModalBottomSheet = false }
+                )
+            }
         }
+
     }
 
 }
