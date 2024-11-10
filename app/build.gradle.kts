@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "br.com.diegodelmiro.droidchat"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "br.com.diegodelmiro.droidchat"
